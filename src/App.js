@@ -6,6 +6,7 @@ import SearchBooks from './Componentes/SearckBooks'
 import { Link, Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
+
     state = {
         books: [],
     }
@@ -24,16 +25,25 @@ class BooksApp extends React.Component {
     }
 
     changeBook = (book, newCat) => {
-        // se não existe shelf (vem da API 'search', crio o attr
+        // se não existe shelf (vem da API 'search'), crio o attr
         if (!book.shelf) {
             book.shelf = newCat
         }
+
         // Atualizo no banco
         BooksAPI.update(book, newCat)
+
         // Atualizo o state de books
-        this.setState((currentState) => ({
-            books: currentState.books.map(b => b.id === book.id ? ({ ...b, shelf: newCat }) : b)
-        }))
+        if (this.state.books.some(b => b.id === book.id)) { // Se existe em books, altero o shelf
+            this.setState((currentState) => ({
+                books: currentState.books.map(b => b.id === book.id ? { ...b, shelf: newCat } : b)
+            }))
+        }
+         else { // Se não existe em books (vem do search), adiciono elemento a books
+            this.setState(currentState => ({
+                books: currentState.books.concat(book)
+            }));
+        }
     }
 
     filterBooksByShelf = (shelf) => {
@@ -57,9 +67,10 @@ class BooksApp extends React.Component {
                                 </div>
                             )} />
 
-                            <Route path='/search' component={() => (
-                                <SearchBooks changeCat={this.changeBook} books={this.state.books} />
+                            <Route path='/search' render={() => (
+                                <SearchBooks changeCat={this.changeBook} />
                             )} />
+                            
                         </div>
                     </div>
                     <div className="open-search">

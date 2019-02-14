@@ -1,7 +1,14 @@
 import React from 'react'
 import '../App.css'
+import PropTypes from 'prop-types'
 
 class BooksCat extends React.Component {
+
+    static propTypes = {
+        titleCat: PropTypes.string.isRequired,
+        booksShelf: PropTypes.array.isRequired,
+        changeCat: PropTypes.func.isRequired
+    };
 
     marcaShelf = (shelf) => {
         return typeof (shelf) === 'undefined' ? 'none' : shelf

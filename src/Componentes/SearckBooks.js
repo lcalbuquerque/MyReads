@@ -3,8 +3,13 @@ import '../App.css'
 import * as BooksAPI from '../BooksAPI'
 import { Link } from 'react-router-dom'
 import BooksCat from '../Componentes/BooksCat'
+import PropTypes from 'prop-types'
 
 class SearchBooks extends React.Component {
+
+    static propTypes = {
+        changeCat: PropTypes.func.isRequired
+    };
 
     state = {
         booksSearch: [],
