@@ -34,7 +34,7 @@ class SearchBooks extends React.Component {
     }
 
     changeBookSearch = (book, newCat) => {
-        // Atualizo na página principal a nova categoria. Bug: Limpando a página de search
+        // Atualizo na página principal a nova categoria.
         this.props.changeCat(book, newCat)
         this.setState((currentState) => ({
             booksSearch: currentState.booksSearch.filter(b => b !== book),
