@@ -10,10 +10,6 @@ class BooksCat extends React.Component {
         changeCat: PropTypes.func.isRequired
     };
 
-    marcaShelf = (shelf) => {
-        return typeof (shelf) === 'undefined' ? 'none' : shelf
-    }
-
     defImagem = (imageLink) => {
         return imageLink ? `url("${imageLink.smallThumbnail}")` : ''
     }
@@ -36,7 +32,7 @@ class BooksCat extends React.Component {
                                         <div className="book-top">
                                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: this.defImagem(b.imageLinks)  }}></div>
                                             <div className="book-shelf-changer">
-                                                <select onChange={(e) => this.props.changeCat(b, e.target.value)} defaultValue={ this.marcaShelf(b.shelf) }>
+                                                <select onChange={(e) => this.props.changeCat(b, e.target.value)} defaultValue={ b.shelf }>
                                                     <option value="move" disabled>Move to...</option>
                                                     <option value="currentlyReading">Currently Reading</option>
                                                     <option value="wantToRead">Want to Read</option>

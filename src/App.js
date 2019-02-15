@@ -21,12 +21,8 @@ class BooksApp extends React.Component {
     }
 
     changeBook = (book, newCat) => {
-        // se não existe shelf (vem da API 'search'), crio o attr
-        if (!book.shelf) {
-            book.shelf = newCat
-        }
 
-        // Atualizo no banco
+        // Atualizo o banco
         BooksAPI.update(book, newCat)
 
         // Atualizo o state de books
@@ -35,7 +31,8 @@ class BooksApp extends React.Component {
                 books: currentState.books.map(b => b.id === book.id ? { ...b, shelf: newCat } : b)
             }))
         }
-         else { // Se não existe em books (vem do search), adiciono elemento a books
+        else { // Se não existe em books (vem do search), adiciono elemento a books
+            book.shelf = newCat
             this.setState(currentState => ({
                 books: currentState.books.concat(book)
             }));
@@ -55,7 +52,7 @@ class BooksApp extends React.Component {
                     </div>
                     <div className="list-books-content">
                         <div>
-                            <Route exact path='/' component={() => (
+                            <Route exact path='/' render={() => (
                                 <div>
                                     <BooksCat titleCat='Currently Reading' booksShelf={this.filterBooksByShelf('currentlyReading')} changeCat={this.changeBook} />
                                     <BooksCat titleCat='Want to Read' booksShelf={this.filterBooksByShelf('wantToRead')} changeCat={this.changeBook} />
@@ -64,7 +61,7 @@ class BooksApp extends React.Component {
                             )} />
 
                             <Route path='/search' render={() => (
-                                <SearchBooks changeCat={this.changeBook} />
+                                <SearchBooks changeCat={this.changeBook} books={this.state.books} />
                             )} />
                             
                         </div>
