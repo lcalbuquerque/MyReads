@@ -43,7 +43,11 @@ class BooksApp extends React.Component {
         return this.state.books.filter(b => b.shelf === shelf)
     }
 
+
     render() {
+
+        const shelves = [{ title: 'Currently Reading', shelf: 'currentlyReading' }, { title: 'Want to Read', shelf: 'wantToRead' }, { title: 'Read', shelf: 'read' }]
+
         return (
             <div className="app">
                 <div className="list-books">
@@ -54,16 +58,16 @@ class BooksApp extends React.Component {
                         <div>
                             <Route exact path='/' render={() => (
                                 <div>
-                                    <BooksCat titleCat='Currently Reading' booksShelf={this.filterBooksByShelf('currentlyReading')} changeCat={this.changeBook} />
-                                    <BooksCat titleCat='Want to Read' booksShelf={this.filterBooksByShelf('wantToRead')} changeCat={this.changeBook} />
-                                    <BooksCat titleCat='Read' booksShelf={this.filterBooksByShelf('read')} changeCat={this.changeBook} />
+                                    {shelves.map(s =>
+                                        <BooksCat titleCat={s.title} booksShelf={this.filterBooksByShelf(s.shelf)} changeCat={this.changeBook} />
+                                    )}
                                 </div>
                             )} />
 
                             <Route path='/search' render={() => (
                                 <SearchBooks changeCat={this.changeBook} books={this.state.books} />
                             )} />
-                            
+
                         </div>
                     </div>
                     <div className="open-search">
