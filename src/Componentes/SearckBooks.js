@@ -26,14 +26,16 @@ class SearchBooks extends React.Component {
         else {
             BooksAPI.search(`${e.target.value}`)
                 .then((booksSearch) => {
-
-                    for (let item of booksSearch) {
-                        let theBook = this.props.books.find(b => b.id === item.id)
-                        item.shelf = theBook ? theBook.shelf : 'none'
+                    if (!booksSearch.error) { // Tratamento de erro caso busca seja "inválida"
+                        for (let item of booksSearch) {
+                            let theBook = this.props.books.find(b => b.id === item.id)
+                            item.shelf = theBook ? theBook.shelf : 'none'
+                        }
+                        this.setState(() => ({ booksSearch }))
                     }
-                    this.setState(() => ({
-                        booksSearch,
-                    }))
+                    else {
+                        this.setState({ booksSearch: [] })
+                    }
                 })
         }
     }
