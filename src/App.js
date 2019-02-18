@@ -59,7 +59,7 @@ class BooksApp extends React.Component {
                             <Route exact path='/' render={() => (
                                 <div>
                                     {shelves.map(s =>
-                                        <BooksCat titleCat={s.title} booksShelf={this.filterBooksByShelf(s.shelf)} changeCat={this.changeBook} />
+                                        <BooksCat key={s.shelf} titleCat={s.title} booksShelf={this.filterBooksByShelf(s.shelf)} changeCat={this.changeBook} />
                                     )}
                                 </div>
                             )} />
