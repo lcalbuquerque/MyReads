@@ -58,7 +58,7 @@ class SearchBooks extends React.Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BooksCat titleCat='None' booksShelf={this.state.booksSearch} changeCat={this.changeBookSearch} />
+                    <BooksCat titleCat='Search Result' booksShelf={this.state.booksSearch} changeCat={this.changeBookSearch} />
                 </div>
             </div >
         )
