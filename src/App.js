@@ -46,7 +46,11 @@ class BooksApp extends React.Component {
 
     render() {
 
-        const shelves = [{ title: 'Currently Reading', shelf: 'currentlyReading' }, { title: 'Want to Read', shelf: 'wantToRead' }, { title: 'Read', shelf: 'read' }]
+        const shelves = [
+            { title: 'Currently Reading', shelf: 'currentlyReading' },
+            { title: 'Want to Read', shelf: 'wantToRead' },
+            { title: 'Read', shelf: 'read' }
+        ]
 
         return (
             <div className="app">

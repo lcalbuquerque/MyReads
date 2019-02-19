@@ -15,7 +15,7 @@ class BooksCat extends React.Component {
     }
 
     rendAuthors = (authors) => {
-        return authors ? authors.map( (a, i) => <span key={i}> {a} <br /></span>) : ''
+        return authors ? authors.map((a, i) => <span key={i}> {a} <br /></span>) : ''
     }
 
     render() {
@@ -26,13 +26,13 @@ class BooksCat extends React.Component {
                 <div className="bookshelf-books">
                     <ol className="books-grid">
                         {
-                            this.props.booksShelf.length > 0 && (this.props.booksShelf.map((b, i) =>
+                            this.props.booksShelf.map((b, i) =>
                                 <li key={i}>
                                     <div className="book">
                                         <div className="book-top">
-                                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: this.defImagem(b.imageLinks)  }}></div>
+                                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: this.defImagem(b.imageLinks) }}></div>
                                             <div className="book-shelf-changer">
-                                                <select onChange={(e) => this.props.changeCat(b, e.target.value)} value={ b.shelf }>
+                                                <select onChange={(e) => this.props.changeCat(b, e.target.value)} value={b.shelf}>
                                                     <option value="move" disabled>Move to...</option>
                                                     <option value="currentlyReading">Currently Reading</option>
                                                     <option value="wantToRead">Want to Read</option>
@@ -42,11 +42,11 @@ class BooksCat extends React.Component {
                                             </div>
                                         </div>
                                         <div className="book-title">{b.title}</div>
-                                        <div className="book-authors">{ this.rendAuthors(b.authors) } </div>
+                                        <div className="book-authors">{this.rendAuthors(b.authors)} </div>
                                     </div>
                                 </li>
                             )
-                            )}
+                        }
                     </ol>
                 </div>
             </div>
